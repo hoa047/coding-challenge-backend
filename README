@@ -1,0 +1,99 @@
+Table of Contents
+	1. Introduction
+	2. How to start the program
+	3. How to test the program
+	4. Improvements
+
+
+1. Introduction
+	This program simulates a simple register over stolen bikes and police officers assigned to the cases.
+
+	It is based on this tutorial:
+	https://medium.com/@leo_hetsch/local-development-with-go-postgresql-and-elasticsearch-in-docker-61bc8a0d5e66
+	
+	The program can be interacted through the followig API endpoints:
+
+	/officers
+		GET 
+		POST
+		PUT
+		DELETE
+
+	/bike-thefts
+		GET 
+		POST
+		PUT
+		DELETE
+
+	For details, please refer to the postman collection BikeTheftTracker.postman_collection.json
+	found in the postman folder.
+
+2. How to start the program
+	cd path-to-program
+	docker compose up
+
+3. How to test the program
+	cd path-to-program
+	docker compose up
+	cd test
+	go test
+	(note that the program must be running for the tests to succeed)
+
+	3.1 A note on testing image download and upload for bikeThefts
+		Since no automated tests are written for image handling the below steps can be used: 
+
+		Check the image's md5sum
+			POST create a new bike theft case		
+				see POSTMAN call postBikeTheft for example
+			PUT  upload the image to this new case		
+				see POSTMAN call putBikeTheftImage for example
+			GET get the newly created case and download the image
+				see POSTMAN call getBikeTheftId for example
+		Check the image's md5sum
+
+		The md5sum should be the same for the original image and the downloaded image
+
+4. Improvements
+	Normally I would discuss the below point with others and proceed solving it if it is prioritized by project management.
+	I have given each of the point around two days and have not made any breakthrough yet.
+	So I list them here:
+
+	4.1 POSTMAN
+		
+		4.1.1	"invalid character '-' in numeric literal" message
+			when using muliform-data I get 
+				invalid character '-' in numeric literal 
+
+			this is a json error. Not sure where this happens.
+			Only happens for putBikeTheftImage.
+
+			I have tried:
+				commenting out the entire PUT case in bikeTheftsHandler and we still get this error. 
+
+		4.1.2	Image upload - first image does not reach the code 	
+			In common.go -> func getImageAsBytes this line fetches the image:
+				fileHeader := r.MultipartForm.File["image"][0]
+ 
+			If only one image is uploaded then no image will be fetched. If two images are updated then one image will be fetched.
+			It does not fetch the first image, but it fetches the second and the rest. 		
+
+			len(r.MultipartForm.File["image"]) shows n-1 where n is the number of uploaded files with the key "image"
+
+	4.2 We need to test concurrency 			
+		How does the database handle parallell read write?
+		Use go routines and channels? 	
+
+	4.3 Update PUT bikeThefts so that individual fields can be updated.
+		Right now only solved, imageName and image can be updated.
+
+	4.4 Test cases
+		4.4.1 Add automated tests for image download & upload, 
+			We need tests that will be run for image download and upload when go test is run.
+			see "3.1 A note on testing image download and upload for bikeThefts"
+
+		4.4.2 Dump and load the database during every test run
+			main_test.go deletes the database before every test run to ensure that we start with empty tables.
+			A better solutio would be:
+				1. dump the database 
+				2. run the tests which changes the database's state
+				3. restore the database to the state before running the tests by loading the dump file from point 1

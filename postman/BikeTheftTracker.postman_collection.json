@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "0c3f6429-995a-46b1-987a-a6310798957d",
+		"name": "BikeTheftTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getOfficers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/officers",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOfficerId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/officers?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOfficerVacant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/officers?fetch=vacant",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					],
+					"query": [
+						{
+							"key": "fetch",
+							"value": "vacant"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postOfficer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"John Doe\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8888/officers",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putOfficer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1, \n\t\"name\":\"Jane Doe\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8888/officers",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteOfficer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1\n}"
+				},
+				"url": {
+					"raw": "localhost:8888/officers",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"officers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBikeThefts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBikeTheftId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts?id=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBikeTheftsUnassigned",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts?fetch=unassigned",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					],
+					"query": [
+						{
+							"key": "fetch",
+							"value": "unassigned"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postBikeTheft",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"2015-04-21 13:12\",\n\t\"brand\":\"Sample\",\n\t\"city\":\"Malmö\",\n\t\"description\":\"Blue, 26-inch, mountain bike, frame number: WSBC602293804L\", \n\t\"image_name\":\"TO BE ADDED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putBikeTheftImage",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=923407813002387011913524",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/hoatruo/Desktop/BIKE/go-projects/postman/blueMountainBike.jpeg"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/hoatruo/Desktop/BIKE/go-projects/postman/blueMountainBike.jpeg"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "imageName",
+							"value": "blueMountainBike.jpeg",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putBikeTheftSolved",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1\n}"
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBikeTheft",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1\n}"
+				},
+				"url": {
+					"raw": "localhost:8888/bike-thefts",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"bike-thefts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

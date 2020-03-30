@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password123
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    container_name: app
+    environment: 
+      DEBUG: 'true'
+    command: ["./wait-for-it.sh", "db:5432", "--", "go", "run", "main.go", "8888", "db"]
+    volumes:
+      - .:/go/src/app
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+    links:
+      - db
